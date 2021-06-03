@@ -1,2 +1,2 @@
 # rest-server-application
-Rest Server Application
+Spring boot Rest-Server-Application

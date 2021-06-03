@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="log-path">/Users/g67v/Source/git/git_learn/rest-server-application/logs</Property>
+        <Property name="archive-path">/Users/g67v/Source/git/git_learn/rest-server-application/logs/archive</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="consoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+            <Filters>
+                <ThresholdFilter level="DEBUG"/>
+            </Filters>
+        </Console>
+
+        <RollingFile name="fileLogAppender"
+                     fileName="${log-path}/serverLogs.txt"
+                     filePattern="${archive-path}/serverLogs.txt.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1000KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+
+        <Root level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="fileLogAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
